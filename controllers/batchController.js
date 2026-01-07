@@ -39,7 +39,17 @@ export const createBatch = async (req, res) => {
 // Update batch
 export const updateBatch = async (req, res) => {
   try {
-    const batch = await Batch.findByIdAndUpdate(req.params.id, req.body, {
+    // Prepare update data - remove empty/null book fields to preserve existing values
+    const updateData = { ...req.body };
+    
+    if (!updateData.currentBook) {
+      delete updateData.currentBook;
+    }
+    if (!updateData.upcomingBook) {
+      delete updateData.upcomingBook;
+    }
+    
+    const batch = await Batch.findByIdAndUpdate(req.params.id, updateData, {
       new: true,
       runValidators: true
     }).populate('faculty').populate('currentBook').populate('upcomingBook');

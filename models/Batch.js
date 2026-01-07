@@ -4,7 +4,7 @@ const BatchSchema = new mongoose.Schema({
   code: { 
     type: String, 
     required: [true, 'Batch code is required'], 
-    unique: true, 
+    unique: { sparse: true },
     trim: true 
   },
   faculty: { 
