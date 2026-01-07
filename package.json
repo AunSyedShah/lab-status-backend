@@ -5,6 +5,9 @@
   "devDependencies": {
     "@types/bun": "latest"
   },
+  "scripts": {
+    "start": "bun run index.js"
+  },
   "peerDependencies": {
     "typescript": "^5"
   },
