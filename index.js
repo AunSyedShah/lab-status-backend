@@ -9,13 +9,15 @@ import timeSlotRoutes from './routes/timeSlots.js';
 import allocationRoutes from './routes/allocations.js';
 import seedRoutes from './routes/seed.js';
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/lab_status';
+const CORS_ORIGINS = process.env.CORS_ORIGINS?.split(',') || ['http://localhost:5173', 'http://localhost:3000'];
 
 // CORS Configuration
 const corsOptions = {
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: CORS_ORIGINS,
   credentials: true,
   optionsSuccessStatus: 200
 };
