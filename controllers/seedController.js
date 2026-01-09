@@ -4,8 +4,10 @@ import Book from '../models/Book.js';
 import Batch from '../models/Batch.js';
 import TimeSlot from '../models/TimeSlot.js';
 import Allocation from '../models/Allocation.js';
+import logger from '../utils/logger.js';
 
 export const seedDatabase = async (req, res) => {
+  logger.info('Starting database seed operation...');
   try {
     // Clear existing data
     await Lab.deleteMany({});
@@ -102,19 +104,24 @@ export const seedDatabase = async (req, res) => {
       }
     ]);
 
+    const seedStats = {
+      labs: labs.length,
+      faculties: faculties.length,
+      books: books.length,
+      batches: batches.length,
+      timeSlots: timeSlots.length,
+      allocations: allocations.length
+    };
+
+    logger.success('Database seeded successfully', seedStats);
+
     res.status(200).json({
       success: true,
       message: 'Database seeded successfully',
-      data: {
-        labs: labs.length,
-        faculties: faculties.length,
-        books: books.length,
-        batches: batches.length,
-        timeSlots: timeSlots.length,
-        allocations: allocations.length
-      }
+      data: seedStats
     });
   } catch (error) {
+    logger.error('Error seeding database', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };

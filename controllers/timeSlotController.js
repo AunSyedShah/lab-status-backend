@@ -1,4 +1,5 @@
 import TimeSlot from '../models/TimeSlot.js';
+import logger from '../utils/logger.js';
 
 // Get all time slots
 export const getAllTimeSlots = async (req, res) => {

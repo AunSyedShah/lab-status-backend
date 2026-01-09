@@ -6,7 +6,11 @@
     "@types/bun": "latest"
   },
   "scripts": {
-    "start": "bun run index.js"
+    "start": "bun run index.js",
+    "dev": "NODE_ENV=development bun --watch run index.js",
+    "dev:win": "set NODE_ENV=development && bun run index.js",
+    "prod": "NODE_ENV=production bun run index.js",
+    "prod:win": "set NODE_ENV=production && bun run index.js"
   },
   "peerDependencies": {
     "typescript": "^5"
@@ -14,6 +18,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
     "mongoose": "^9.1.2"
   }
 }

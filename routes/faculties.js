@@ -4,12 +4,14 @@ import {
   getFacultyById,
   createFaculty,
   updateFaculty,
-  deleteFaculty
+  deleteFaculty,
+  getFreeFacultiesBySlot
 } from '../controllers/facultyController.js';
 
 const router = express.Router();
 
 // Routes
+router.get('/summary/free-by-slot', getFreeFacultiesBySlot);
 router.get('/', getAllFaculties);
 router.get('/:id', getFacultyById);
 router.post('/', createFaculty);
